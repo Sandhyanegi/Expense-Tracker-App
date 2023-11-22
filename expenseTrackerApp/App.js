@@ -8,6 +8,7 @@ import ManageExpense from './screens/ManageExpense';
 import RecentExpenses from './screens/RecentExpenses';
 import AllExpenses from './screens/AllExpenses';
 import {GLobalStyles} from './constants/styles';
+import IconButton from './components/UI/IconButton';
 
 
 
@@ -18,12 +19,18 @@ export default function App() {
   function ExpensesOverview() {
     return( 
       <BottomTabs.Navigator
-            screenOptions={{
+            screenOptions={({navigation}) => ({
                 headerStyle: {backgroundColor: GLobalStyles.colors.primary500},
                 headerTintColor: 'white',
                 tabBarStyle: {backgroundColor: GLobalStyles.colors.primary500},
-                tabBarActiveTintColor: GLobalStyles.colors.accent500
-              }}
+                tabBarActiveTintColor: GLobalStyles.colors.accent500,
+                headerRight: ({tintColor}) =>
+                  <IconButton 
+                    icon="add" size={24} 
+                    color={tintColor} 
+                    onPress={()=>{navigation.navigate('ManageExpense')}} />
+              })
+            }
       >
         <BottomTabs.Screen 
           name="RecentExpenses" 
